@@ -11,7 +11,6 @@ def create_connection(db_file):
     conn = None
     try:
         conn = sqlite3.connect(db_file)
-        return conn
     except sqlite3.Error as e:
         print(e)
     return conn
@@ -200,49 +199,49 @@ if __name__ == "__main__":
                 "2023-04-19",
             ),
         ]
-    for item in modules:
-        add_module(conn, item)
-        submodules = [
-            (1, "Podstawy pisania kodu", "No", "ended"),
-            (1, "Zmienne", "Yes", "ended"),
-            (1, "Liczby i działania", "Yes", "ended"),
-            (1, "Pętle", "Yes", "ended"),
-            (1, "Wyrażenia warunkowe i boolean", "No", "ended"),
-            (1, "Pętle – rozszerzenie", "No", "ended"),
-            (1, "Podsumowanie", "No", "ended"),
-            (2, "Poznajemy kolekcje", "No", "ended"),
-            (2, "Funkcje kolekcji", "No", "ended"),
-            (2, "Modyfikacje kolekcji", "Yes", "ended"),
-            (2, "Nawigacja w pętlach", "No", "ended"),
-            (2, "Operacje na danych", "Yes", "ended"),
-            (2, "Podsumowanie", "No", "ended"),
-            (2, "Podsumowanie", "No", "ended"),
-            (3, "Niezbędne narzędzia", "Yes", "ended"),
-            (3, "Śledzenie zmian w kodzie", "Yes", "ended"),
-            (3, "Git – repozytorium zdalne", "No", "ended"),
-            (3, "Praca ze zdalnymi repozytoriami", "Yes", "ended"),
-            (3, "Podsumowanie", "No", "ended"),
-        ]
-    for item in submodules:
-        add_submodule(conn, item)
+        for item in modules:
+            add_module(conn, item)
+            submodules = [
+                (1, "Podstawy pisania kodu", "No", "ended"),
+                (1, "Zmienne", "Yes", "ended"),
+                (1, "Liczby i działania", "Yes", "ended"),
+                (1, "Pętle", "Yes", "ended"),
+                (1, "Wyrażenia warunkowe i boolean", "No", "ended"),
+                (1, "Pętle – rozszerzenie", "No", "ended"),
+                (1, "Podsumowanie", "No", "ended"),
+                (2, "Poznajemy kolekcje", "No", "ended"),
+                (2, "Funkcje kolekcji", "No", "ended"),
+                (2, "Modyfikacje kolekcji", "Yes", "ended"),
+                (2, "Nawigacja w pętlach", "No", "ended"),
+                (2, "Operacje na danych", "Yes", "ended"),
+                (2, "Podsumowanie", "No", "ended"),
+                (2, "Podsumowanie", "No", "ended"),
+                (3, "Niezbędne narzędzia", "Yes", "ended"),
+                (3, "Śledzenie zmian w kodzie", "Yes", "ended"),
+                (3, "Git – repozytorium zdalne", "No", "ended"),
+                (3, "Praca ze zdalnymi repozytoriami", "Yes", "ended"),
+                (3, "Podsumowanie", "No", "ended"),
+            ]
+        for item in submodules:
+            add_submodule(conn, item)
 
-    # Wyświetlanie danych
-    print("Wyświetlanie drugiego modułu: \n")
-    print(f"{select_where(conn, 'modules', id= 2)} \n")
-    print("Wyświetlanie zawartości modułu: \n")
-    print(f"{select_where(conn, 'submodules', module_id= 2)} \n")
+        # Wyświetlanie danych
+        print("Wyświetlanie drugiego modułu: \n")
+        print(f"{select_where(conn, 'modules', id= 2)} \n")
+        print("Wyświetlanie zawartości modułu: \n")
+        print(f"{select_where(conn, 'submodules', module_id= 2)} \n")
 
-    # Update daty w module 2
-    print("Aktualizacja daty w module drugim: \n")
-    update(conn, "modules", 2, start_date="2023-05-12")
-    print()
-    print("Wyświetlanie drugiego modułu z poprawioną datą: \n")
-    print(f"{select_where(conn, 'modules', id= 2)}\n")
+        # Update daty w module 2
+        print("Aktualizacja daty w module drugim: \n")
+        update(conn, "modules", 2, start_date="2023-05-12")
+        print()
+        print("Wyświetlanie drugiego modułu z poprawioną datą: \n")
+        print(f"{select_where(conn, 'modules', id= 2)}\n")
 
-    # Usuwanie ostatniego elementu z moduły drugiego
-    print("Usuwanie zdublowanej pozycji w module drugim: \n")
-    delete_where(conn, "submodules", id=14)
-    print()
-    print("Wyświetlanie drugiego modułu z usuniętą pozycją: \n")
-    print(f"{select_where(conn, 'submodules', module_id= 2)}\n")
-    conn.close()
+        # Usuwanie ostatniego elementu z moduły drugiego
+        print("Usuwanie zdublowanej pozycji w module drugim: \n")
+        delete_where(conn, "submodules", id=14)
+        print()
+        print("Wyświetlanie drugiego modułu z usuniętą pozycją: \n")
+        print(f"{select_where(conn, 'submodules', module_id= 2)}\n")
+        conn.close()
